@@ -3,8 +3,8 @@ class Rewindagents < Formula
 
   desc "Undo for AI coding agents: record, diff, and rewind tool calls"
   homepage "https://github.com/Johnbjoseph-cybersec/rewindagents"
-  url ""
-  sha256 ""
+  url "https://files.pythonhosted.org/packages/12/44/79b092749535f56efd6ab8d2cf9c41002f2e1d609d2efc247114397d8499/rewindagents-1.2.0.tar.gz"
+  sha256 "3bbc7be70fb2ad33cd861d26be95cef47aa5b6d851a030cb9fc682522dbf68b5"
   license "Apache-2.0"
 
   depends_on "python@3.12"
