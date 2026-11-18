@@ -1,0 +1,29 @@
+name: test
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  formula:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@main
+      - name: Install from this checkout's tap
+        run: |
+          brew tap-new --no-git local/test
+          cp Formula/rewindagents.rb "$(brew --repository)/Library/Taps/local/homebrew-test/Formula/"
+          brew install --build-from-source local/test/rewindagents
+      - name: brew test
+        run: brew test local/test/rewindagents
+      - name: Run it
+        run: |
+          rewindagents --version
+          mkdir demo && cd demo && git init -q && rewindagents status || true
